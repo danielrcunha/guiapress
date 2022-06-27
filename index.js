@@ -23,8 +23,8 @@ connection.authenticate()
 
 app.get("/", (req, res) => {
     res.render("index");
-})
+});
 
 app.listen(8080, () => {
     console.log("O servidor está rodando!")
-})
+});
