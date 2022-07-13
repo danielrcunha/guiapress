@@ -7,8 +7,13 @@ const Article = require("./Article");
 const slugify = require("slugify");
 
 router.get("/admin/articles", (req, res) => {
-    res.render("admin/articles/index")
-});
+    //busca todos os registro do BD com findall e recebe no .then
+    Article.findAll({
+        include: [{ model: Category }] //JOIN com Category p/ pegar a descrição
+    }).then(articles => {
+        res.render("admin/articles/index", { articles: articles }) //rederizando para admin/articles/index e repassa para view
+    })
+})
 
 router.get("/admin/articles/new", (req, res) => {
     Category.findAll().then(categories => {

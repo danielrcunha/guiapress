@@ -16,6 +16,16 @@
             </tr> 
         </thead>
         <tbody>
+            
+              <% articles.forEach(article =>{ %>
+            <tr><!--Linhas-->
+                <td><%= article.id%></td><!--Colunas-->
+                <td><%=article.title%></td>
+                <td><%=article.slug%></td>
+                <td><%=article.category.title%></td>
+                <td>Ações</td>
+            </tr>
+              <% }) %>
               
         </tbody>
     </table>
