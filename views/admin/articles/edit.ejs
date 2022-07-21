@@ -15,15 +15,33 @@
                 <textarea class="form-control" placeholder="Escreva o artigo aqui!" name="body" id="article"></textarea>
                 <br><label>Categorias</label>
                 <select name="category" class="form-control">
+                    
+                    <!--
                     <% categories.forEach((category)=>{%>
                         <option value="<%= category.id%>"><%= category.title%></option>
-                    <%})%>   
+                    <%})%>
+                    -->
+                    
+                    
+                    <% categories.forEach((category)=>{%>
+                        <%if(category.id == article.categoryId){%>
+                            <option value="<%= category.id%>" selected><%= category.title %></option>
+                            <% } else { %>
+                            <option value="<%= category.id%>"><%= category.title %></option>
+                        <% } %>
+                    <%})%>
+                     
+
                 </select>
                 <br>
                 <button class="btn btn-success">Atualizar</button>
             </form>
-            </div>
+         </div>
     </div>
+</div>
+
+<div id="content" style="display: none;">
+    <%- article.body %>
 </div>
 
 <%- include('../../partials/footer.ejs')%>
@@ -37,6 +55,9 @@
         selector: "#article",
         plugins: [
             'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
-        ]
+        ],
+        init_instance_callback:()=>{
+            tinymce.get("article").setContent($("#content").html())
+        }
     })
 </script>
