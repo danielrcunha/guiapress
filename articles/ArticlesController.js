@@ -92,4 +92,40 @@ router.post("/articles/update", (req, res) => {
     });
 });
 
+/*ROTA DE PAGINAÇÃO*/
+router.get("/articles/page/:num", (req, res) => {
+    var page = req.params.num;
+
+    if (isNaN(page) || page == 1) {
+        offset = 0;
+    } else {
+        offset = parseInt(page) * 2; // parseInt converte valor texto p valor numerico
+    }
+
+    Article.findAndCountAll({
+        limit: 4, /*indica quantos artigos serão mostrados na tela*/
+        offset: offset
+    }).then(articles => {
+
+        var next;
+        if (offset + 4 >= articles.count) {
+            next = false;
+            console.log('Chegamos na última pagina!');
+        } else {
+            next = true;
+        }
+
+        var result = {
+            next: next,
+            articles: articles
+        }
+
+        Category.findAll().then(categories => {
+            res.render("admin/articles/page", { result: result, categories: categories })
+        });
+
+        //res.json(result); //usar só se quiser ver o texto no JSON
+    })
+})
+
 module.exports = router;
