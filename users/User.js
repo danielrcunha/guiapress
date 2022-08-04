@@ -5,7 +5,8 @@ const User = connection.define('users', {
     email: {
         type: Sequelize.STRING,
         allowNull: false
-    }, password: {
+    }, 
+    password: {
         type: Sequelize.STRING,
         allowNull: false
     }
