@@ -95,11 +95,12 @@ router.post("/articles/update", (req, res) => {
 /*ROTA DE PAGINAÇÃO*/
 router.get("/articles/page/:num", (req, res) => {
     var page = req.params.num;
+    var offset = 0;
 
     if (isNaN(page) || page == 1) {
         offset = 0;
     } else {
-        offset = parseInt(page) * 2; // parseInt converte valor texto p valor numerico
+        offset = (parseInt(page) - 1) * 4; // parseInt converte valor texto p valor numerico
     }
 
     Article.findAndCountAll({
@@ -119,6 +120,7 @@ router.get("/articles/page/:num", (req, res) => {
         }
 
         var result = {
+            page: parseInt(page),
             next: next,
             articles: articles
         }
