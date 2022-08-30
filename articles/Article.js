@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const connection = require("../database/database");
 
 //fazendo um relacionamento entre tabelas
-const Category = require("../categories/Category") //importar module
+const Category = require("../categories/Category") //importar modules
 
 
 const Article = connection.define('articles', {
