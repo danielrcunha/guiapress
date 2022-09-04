@@ -14,7 +14,7 @@ router.get("/admin/users/create", (req, res) => {
     res.render("admin/users/create");
 });
 
-/*ROTA P/ RECEBER CAD USUÁRIO TIPO POST*/
+/*ROTA P/ RECEBER CAD USUÁRIO TIPO POSTT*/
 router.post("/users/create", (req, res) => {
     var email = req.body.email;
     var password = req.body.password;
@@ -59,7 +59,8 @@ router.post("/authenticate", (req, res) => {
                     id: user.id,
                     email: user.email
                 }
-                res.json(req.session.user);
+                //res.json(req.session.user);
+                res.redirect("/admin/articles");
             } else {
                 res.redirect("/login");
             }
