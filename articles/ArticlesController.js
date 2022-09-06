@@ -1,6 +1,6 @@
 //chamado ROUTER para criar rotas
 
-const express = require("express");
+const express = require("express"); //comentando
 const router = express.Router();
 const Category = require("../categories/Category");
 const Article = require("./Article");
